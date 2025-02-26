@@ -1,4 +1,4 @@
-# 🚀 B20_Group08 - Intruder Detection System using Multi-Beam Lasers
+# 🛡️ Intruder Detection System using Multi-Beam Lasers
 
 ## 📌 Overview
 Our **Intruder Detection System** is a **proactive security solution** designed to detect unauthorized access in **real-time** and provide **instant alerts**. Unlike conventional security systems that rely on **passive monitoring**, this system uses **multi-beam lasers** to form an **invisible security grid**, ensuring immediate detection and response.
@@ -69,3 +69,13 @@ The circuit diagram represents the wiring and connections of our **Intruder Dete
 - **Hardware:** Arduino Uno, KY-008 Laser Module, LDRs, SIM800L, OLED I2C Display, Buzzer  
 - **Backend:** Node.js, Firebase, AWS  
 - **Mobile App:** Integrated with Firebase for real-time notifications  
+
+---
+
+## 👥 Contributors
+| Name                          | Index Number |
+|--------------------------------|--------------|
+| **Pitigala P.K.D.G. D**       | 204161D      |
+| **Batagalla B.G.H. M**        | 204021B      |
+| **Dissanayake D.M.L. A**      | 204048M      |
+| **Hettiarachchi D.Y.N. R**    | 204075R      |
