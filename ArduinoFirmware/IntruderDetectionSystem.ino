@@ -110,6 +110,75 @@ void triggerAlarm() {
     Serial.println(F("Alarm Triggered!"));
 }
 
+void sendDataToAPI(int laserNumber) {
+    Serial.println(F("Initializing API request..."));
+
+    // Setup GPRS and APN Configuration
+    sim800.println(F("AT+CIPSHUT"));
+    delay(2000);
+    printSIM800Response();
+
+    sim800.println(F("AT+SAPBR=3,1,\"CONTYPE\",\"GPRS\""));
+    delay(1000);
+    printSIM800Response();
+
+    sim800.println(F("AT+SAPBR=3,1,\"APN\",\"ppwap\""));
+    delay(1000);
+    printSIM800Response();
+
+    sim800.println(F("AT+SAPBR=1,1"));
+    delay(3000);
+    printSIM800Response();
+
+    sim800.println(F("AT+SAPBR=2,1"));
+    delay(1000);
+    printSIM800Response();
+
+    sim800.println(F("AT+HTTPINIT"));
+    delay(1000);
+    printSIM800Response();
+
+    sim800.println(F("AT+HTTPPARA=\"CID\",1"));
+    delay(1000);
+    printSIM800Response();
+
+    sim800.println(F("AT+HTTPPARA=\"URL\",\"http://3.24.196.92:3000/postData\""));
+    delay(1000);
+    printSIM800Response();
+
+    sim800.println(F("AT+HTTPPARA=\"CONTENT\",\"application/json\""));
+    delay(1000);
+    printSIM800Response();
+
+    // Prepare JSON data
+    String jsonData = "{\"lasertripped\": " + String(laserNumber) + "}";
+    int dataLength = jsonData.length();
+
+    // Send HTTP Data
+    sim800.println("AT+HTTPDATA=" + String(dataLength) + ",10000");
+    delay(1000);
+    sim800.print(jsonData);
+    delay(1000);
+    sim800.write(26);
+
+    delay(5000);
+    printSIM800Response();
+
+    // Send HTTP POST
+    sim800.println(F("AT+HTTPACTION=1"));
+    delay(5000);
+    printSIM800Response();
+
+    // Read response
+    sim800.println(F("AT+HTTPREAD"));
+    delay(1000);
+    printSIM800Response();
+
+    // Close HTTP session
+    sim800.println(F("AT+HTTPTERM"));
+    delay(1000);
+    printSIM800Response();
+}
 
 void resetSystem() {
     Serial.println(F("System Reset"));
@@ -134,6 +203,7 @@ void resetSystem() {
     display.println(F("System Armed"));
     display.display();
 }
+
 
 void printSIM800Response() {
     while (sim800.available()) {
