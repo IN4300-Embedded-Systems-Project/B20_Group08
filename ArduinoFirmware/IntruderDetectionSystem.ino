@@ -58,6 +58,8 @@ void setup() {
     digitalWrite(ledRed, LOW);
     digitalWrite(buzzerPin, LOW);
 
+    calibrateThreshold();
+
     Serial.println(F("System Armed!"));
 
     display.clearDisplay();
@@ -85,6 +87,7 @@ void loop() {
 
     if (intrusionDetected && !smsSent) {
         triggerAlarm();
+        sendSMS();
         sendDataToAPI(interruptedLaser + 1);
         smsSent = true;
     }
@@ -204,6 +207,28 @@ void resetSystem() {
     display.display();
 }
 
+void calibrateThreshold() {
+    Serial.println(F("Calibrating Sensors..."));
+
+    display.clearDisplay();
+    display.setCursor(0, 10);
+    display.println(F("Calibrating..."));
+    display.display();
+
+    int totalLdrValue = 0;
+    int readings = 5;
+
+    for (int i = 0; i < readings; i++) {
+        for (int j = 0; j < numLasers; j++) {
+            totalLdrValue += analogRead(ldrPins[j]);
+        }
+        delay(100);
+    }
+
+    threshold = (totalLdrValue / (readings * numLasers)) - 100;
+    Serial.print(F("Threshold set: "));
+    Serial.println(threshold);
+}
 
 void printSIM800Response() {
     while (sim800.available()) {
