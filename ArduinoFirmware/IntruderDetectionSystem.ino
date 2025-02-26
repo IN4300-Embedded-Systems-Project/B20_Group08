@@ -113,6 +113,28 @@ void triggerAlarm() {
     Serial.println(F("Alarm Triggered!"));
 }
 
+void sendSMS() {
+    Serial.println(F("Sending SMS..."));
+    display.setCursor(0, 40);
+    display.println(F("Sending SMS..."));
+    display.display();
+    delay(500);
+
+    sim800.println(F("AT+CMGF=1"));
+    delay(500);
+    sim800.println(F("AT+CMGS=\"+94763226659\""));
+    delay(500);
+    sim800.print(F("Intruder Alert! Laser "));
+    sim800.print(interruptedLaser + 1);
+    sim800.print(F(" interrupted at "));
+    sim800.print(intrusionTime / 1000);
+    sim800.println(F(" sec."));
+    delay(500);
+    sim800.write(26);
+
+    Serial.println(F("SMS Sent!"));
+}
+
 void sendDataToAPI(int laserNumber) {
     Serial.println(F("Initializing API request..."));
 
