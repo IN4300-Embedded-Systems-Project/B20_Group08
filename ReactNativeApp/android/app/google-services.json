@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "129883723100",
+    "firebase_url": "https://test-7e4f2-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "test-7e4f2",
+    "storage_bucket": "test-7e4f2.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129883723100:android:e811d064cace7ebd0f5d99",
+        "android_client_info": {
+          "package_name": "com.anonymous.expopush"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9SePekSTt8B6ajbTRhNbLOiKttlQtVyQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:129883723100:android:433508c5d4c39a820f5d99",
+        "android_client_info": {
+          "package_name": "test12.ds"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9SePekSTt8B6ajbTRhNbLOiKttlQtVyQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
